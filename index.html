@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown to Later Sunset</title>
+    <meta name="description" content="Track countdown to upcoming sunset milestones at your location">
+    <link rel="stylesheet" href="/src/styles/main.css">
+</head>
+<body>
+    <div id="app">
+        <header class="app-header">
+            <h1 class="app-title">🌅 Countdown to Later Sunset</h1>
+            
+            <!-- Location Display -->
+            <div class="location-display">
+                <div class="location-info">
+                    <span id="current-location" class="location-name">Loading location...</span>
+                    <span id="location-source" class="location-source"></span>
+                </div>
+                <button id="change-location-btn" class="location-change-btn">📍 Change</button>
+            </div>
+        </header>
+        
+        <main class="app-main">
+            <!-- Loading and Error Messages -->
+            <div id="loading-message" class="loading-message" style="display: none;">Loading...</div>
+            <div id="error-message" class="error-message" style="display: none;"></div>
+            
+            <!-- Current Sunset Info -->
+            <section class="current-info">
+                <div id="today-sunset" class="today-sunset">Today's sunset: --:-- --</div>
+            </section>
+            
+            <!-- Primary Countdown Display -->
+            <section class="primary-countdown">
+                <div class="countdown-header">
+                    <h2>Next Milestone</h2>
+                    <div id="next-milestone" class="milestone-time">--:-- --</div>
+                </div>
+                
+                <div class="countdown-timer">
+                    <div class="time-unit">
+                        <span id="days-count" class="time-number">--</span>
+                        <span class="time-label">days</span>
+                    </div>
+                    <div class="time-unit">
+                        <span id="hours-count" class="time-number">--</span>
+                        <span class="time-label">hours</span>
+                    </div>
+                    <div class="time-unit">
+                        <span id="minutes-count" class="time-number">--</span>
+                        <span class="time-label">minutes</span>
+                    </div>
+                    <div class="time-unit">
+                        <span id="seconds-count" class="time-number">--</span>
+                        <span class="time-label">seconds</span>
+                    </div>
+                </div>
+                
+                <div id="countdown-message" class="countdown-message">Calculating...</div>
+            </section>
+            
+            <!-- Upcoming Milestones -->
+            <section class="milestone-section">
+                <h3>Upcoming Milestones</h3>
+                <div id="milestones-list" class="milestones-list">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <!-- Location Picker Modal -->
+    <div id="location-modal" class="location-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Choose Location</h3>
+                <button id="close-picker-btn" class="close-btn">✕</button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Auto-detect Button -->
+                <button id="auto-detect-btn" class="auto-detect-btn">📍 Use My Current Location</button>
+                <div id="location-error" class="location-error" style="display: none;"></div>
+                
+                <!-- Search Locations -->
+                <div class="search-section">
+                    <h4>Search Locations</h4>
+                    <input type="text" id="location-search" class="location-search" placeholder="Type city name...">
+                    <div id="search-results" class="search-results"></div>
+                </div>
+                
+                <!-- Recent Locations -->
+                <div class="recent-section">
+                    <h4>Recent Locations</h4>
+                    <div id="recent-locations" class="recent-locations"></div>
+                </div>
+                
+                <!-- Manual Entry -->
+                <div class="manual-section">
+                    <h4>Manual Entry</h4>
+                    <form id="location-form" class="location-form">
+                        <div class="form-row">
+                            <input type="number" name="latitude" placeholder="Latitude" step="any" min="-90" max="90" required>
+                            <input type="number" name="longitude" placeholder="Longitude" step="any" min="-180" max="180" required>
+                        </div>
+                        <input type="text" name="location-name" placeholder="Name (optional)">
+                        <button type="submit">Set Location</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
