@@ -1,7 +1,7 @@
 {
   "navigationFallback": {
     "rewrite": "/index.html",
-    "exclude": ["/assets/*", "*.{css,scss,sass,js,ts,json,ico,png,jpg,jpeg,gif,svg,woff,woff2,ttf,eot}"]
+    "exclude": ["/assets/*", "*.{css,scss,sass,js,json,ico,png,jpg,jpeg,gif,svg,woff,woff2,ttf,eot}"]
   },
   "routes": [
     {
@@ -10,8 +10,5 @@
         "cache-control": "public, max-age=31536000, immutable"
       }
     }
-  ],
-  "mimeTypes": {
-    ".ts": "application/typescript"
-  }
+  ]
 }
