@@ -73,33 +73,23 @@ class SunsetCountdownApp {
    * Load initial location (try auto-detect, fallback to stored/default)
    */
   private async loadInitialLocation() {
-    this.showLoading('Getting your location...')
+    // Start with default location immediately
+    this.currentLocation = this.geolocationService.getDefaultLocation()
+    console.log('📍 Using default location:', this.currentLocation.name)
+    await this.updateDisplay()
+    this.hideLoading()
     
+    // Try to get better location in the background
     try {
       const locationResult = await this.geolocationService.getCurrentLocation()
       
-      if (locationResult.location) {
+      if (locationResult.location && locationResult.location.source === 'geolocation') {
         this.currentLocation = locationResult.location
-        console.log('📍 Location loaded:', this.currentLocation.name)
-      } else {
-        // Fallback to default location
-        this.currentLocation = this.geolocationService.getDefaultLocation()
-        console.log('📍 Using default location:', this.currentLocation.name)
-        
-        if (locationResult.error) {
-          this.showLocationError(locationResult.error.message)
-        }
+        console.log('📍 Updated to actual location:', this.currentLocation.name)
+        await this.updateDisplay()
       }
-      
-      await this.updateDisplay()
-      
     } catch (error) {
-      console.error('Error loading location:', error)
-      this.currentLocation = this.geolocationService.getDefaultLocation()
-      this.showError('Failed to get location. Using default location.')
-      await this.updateDisplay()
-    } finally {
-      this.hideLoading()
+      console.log('Could not get actual location, using default')
     }
   }
 

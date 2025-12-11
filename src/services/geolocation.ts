@@ -69,7 +69,7 @@ export class GeolocationService {
     return new Promise((resolve) => {
       const options: PositionOptions = {
         enableHighAccuracy: false, // Don't need GPS precision for sunset calculations
-        timeout: 10000, // 10 second timeout
+        timeout: 3000, // 3 second timeout
         maximumAge: 300000 // Accept 5-minute old position
       }
 
